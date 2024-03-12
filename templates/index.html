@@ -154,20 +154,22 @@
                                             <th>Mais informações</th>
                                         </thead>
 
-                                        <tbody>
-                                            <tr>
-                                                <td>Matheus Granda Cesar</td>
-                                                <td>123.123.123.12</td>
-                                                <td>22 de agosto de 2079 as 15:30</td>
-                                                <td>22 de agosto de 2079 as 15:38</td>
-                                                <td>Darth Vader</td>
-                                                <td>
-                                                    <a href="#">
-                                                        Ver informações
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                            <tbody>
+                                                {% for produto in todos_produtos%}
+                                                <tr>
+                                                    <td>{{produto.nome_produto}}</td>
+                                                    <td>{{valor.produto}}</td>
+                                                    <td>{{data.venda}}</td>
+                                                    <td>{{hora.venda}}</td>
+                                                    <td>{{vendedor.venda}}</td>
+                                                    <td>
+                                                        <a href="#">
+                                                            Ver informações
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
                                     </table>
                                 </div>
                             </div>
