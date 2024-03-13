@@ -146,30 +146,29 @@
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
                                         <thead>
-                                            <th>Produto</th>
-                                            <th>Quantidade</th>
-                                            <th>Valor</th>
-                                            <th>Horário da venda</th>
-                                            <th>Vendedor</th>
-                                            <th>Mais informações</th>
+                                            <tr>
+                                                <th>Produto</th>
+                                                <th>Quantidade</th>
+                                                <th>Valor</th>
+                                                <th>Horário da venda</th>
+                                                <th>Vendedor</th>
+                                                <th>Mais informações</th>
+                                            </tr>
                                         </thead>
-
-                                            <tbody>
-                                                {% for produto in todos_produtos%}
+                                        <tbody>
+                                            {% for produto in todos_produtos %}
                                                 <tr>
-                                                    <td>{{produto.nome_produto}}</td>
-                                                    <td>{{valor.produto}}</td>
-                                                    <td>{{data.venda}}</td>
-                                                    <td>{{hora.venda}}</td>
-                                                    <td>{{vendedor.venda}}</td>
+                                                    <td>{{ produto.nome_produto }}</td>
+                                                    <td>{{ produto.quantidade_venda }}</td>
+                                                    <td>{{ produto.valor_produto }}</td>
+                                                    <td>{{ produto.horario_venda }}</td>
+                                                    <td>{{ produto.vendedor }}</td>
                                                     <td>
-                                                        <a href="#">
-                                                            Ver informações
-                                                        </a>
+                                                        <a href="#">Ver informações</a>
                                                     </td>
                                                 </tr>
-                                                {% endfor %}
-                                            </tbody>
+                                            {% endfor %}
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
