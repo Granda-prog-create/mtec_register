@@ -146,27 +146,28 @@
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
                                         <thead>
-                                            <th>Produto</th>
-                                            <th>Quantidade</th>
-                                            <th>Valor</th>
-                                            <th>Horário da venda</th>
-                                            <th>Vendedor</th>
-                                            <th>Mais informações</th>
-                                        </thead>
-
-                                        <tbody>
                                             <tr>
-                                                <td>Matheus Granda Cesar</td>
-                                                <td>123.123.123.12</td>
-                                                <td>22 de agosto de 2079 as 15:30</td>
-                                                <td>22 de agosto de 2079 as 15:38</td>
-                                                <td>Darth Vader</td>
-                                                <td>
-                                                    <a href="#">
-                                                        Ver informações
-                                                    </a>
-                                                </td>
+                                                <th>Produto</th>
+                                                <th>Quantidade</th>
+                                                <th>Valor</th>
+                                                <th>Horário da venda</th>
+                                                <th>Vendedor</th>
+                                                <th>Mais informações</th>
                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for produto in todos_produtos %}
+                                                <tr>
+                                                    <td>{{ produto.nome_produto }}</td>
+                                                    <td>{{ produto.quantidade_venda }}</td>
+                                                    <td>{{ produto.valor_produto }}</td>
+                                                    <td>{{ produto.horario_venda }}</td>
+                                                    <td>{{ produto.vendedor }}</td>
+                                                    <td>
+                                                        <a href="#">Ver informações</a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
