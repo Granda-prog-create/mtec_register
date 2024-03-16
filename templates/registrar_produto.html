@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% load widget_tweaks %}
+
+{% block conteudo %}
+<div class="container">
+    <div class="d-sm-flex align-item-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">{{nome_pagina}}</h1>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <h4 class="mb-3 text-primary">
+                Formulário para registro de produto
+            </h4>
+
+            <p class="mb-5 ml-l">
+                <small>
+                    O asterico indica que o campo é obrigatório
+                </small>
+            
+            <form method="post">
+                <div class="form-row">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <label>{{field.label}} {% if field.field.required %} * {% endif %}</label>
+                    <div class="form-group col-md-12">
+                        {% render_field field placeholder=field.label class="form-control" %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
