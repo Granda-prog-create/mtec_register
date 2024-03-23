@@ -67,6 +67,13 @@
                     <div class="container-fluid">
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">{{nome_pagina}}</h1>
+                            <a href="{% url 'registrar_produto' %}" class="btn btn-primary btn-icon-split btn-sm">
+                                <span class="text">Registrar produto</span>
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-user-plus"></i>
+                                </span>
+                            </a>
+                            
                         </div>
 
                         {% if mensagem %}
@@ -167,10 +174,11 @@
                                                     <td>{{ produto.nome_produto }}</td>
                                                     <td>{{ produto.quantidade_venda }}</td>
                                                     <td>{{ produto.valor_produto }}</td>
-                                                    <td>{{ produto.horario_venda }}</td>
-                                                    <td>{{ produto.vendedor }}</td>
+                                                    <td>{{ produto.get_horario_venda }}</td>
+                                                    <td>{{ produto.get_vendedor }}</td>
                                                     <td>
-                                                        <a href="#">Ver informações</a>
+                                                        <a href="{% url 'informacoes_produto' id=produto.id %}">
+                                                            Ver informações</a>
                                                     </td>
                                                 </tr>
                                             {% endfor %}

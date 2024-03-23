@@ -10,6 +10,15 @@ class Produtos(models.Model):
     supervisor = models.CharField(verbose_name="Supervisor", max_length=194, blank=True)
     # registrado_por = models.ForeignKey("self", verbose_name="Responsável pelo registro", on_delete=models.PROTECT, blank=True, null=True) Opcional!
 
+    def get_horario_venda(self):
+        if self.horario_venda:
+            return self.horario_venda
+        return "O horário da venda não foi registrado"
+    
+    def get_vendedor_responsavel(self):
+        if self.vendedor_responsavel:
+            return self.vendedor_responsavel
+        return "Produto aguardando autorização..."
     class Meta:
         verbose_name = "Produto"
         verbose_name_plural = "Produtos"
