@@ -5,7 +5,7 @@
 {% block conteudo %}
 <div class="container">
     <div class="d-sm-flex align-item-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">{{nome_pagina}}</h1>
+        <h1 class="h3 mb-0 text-gray-800">{{ nome_pagina }}</h1>
     </div>
 
     <div class="card shadow mb-4">
@@ -16,18 +16,37 @@
 
             <p class="mb-5 ml-l">
                 <small>
-                    O asterico indica que o campo é obrigatório
+                    O asterisco indica que o campo é obrigatório
                 </small>
+            </p>
+
+            {% if form.errors %}
+                {% for field in form %}
+                    {% if field.errors %}
+                        {% for erro in field.errors %}
+                            <div class="alert alert-warning" role="alert">
+                                {{ erro }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
             
             <form method="post">
                 <div class="form-row">
                     {% csrf_token %}
                     {% for field in form %}
-                    <label>{{field.label}} {% if field.field.required %} * {% endif %}</label>
-                    <div class="form-group col-md-12">
-                        {% render_field field placeholder=field.label class="form-control" %}
-                    </div>
+                        <label>{{ field.label }} {% if field.field.required %} * {% endif %}</label>
+                        <div class="form-group col-md-12">
+                            {% render_field field placeholder=field.label class="form-control" %}
+                        </div>
                     {% endfor %}
+                </div>
+
+                <div class="text-right">
+                    <button class="btn btn-primary" type="submit">
+                        <span class="text">Registrar produto</span>
+                    </button>
                 </div>
             </form>
         </div>
