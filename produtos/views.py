@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import (render, redirect, get_list_or_404)
+from django.shortcuts import render, redirect, get_object_or_404
 from produtos.models import Produtos
 from produtos.forms import ProdutosForm
 
@@ -18,6 +18,7 @@ def registar_produto(request):
     return render(request, "registrar_produto.html", context)
 
 def informacoes_produto(request, id):
-    produto = get_list_or_404(Produtos, id=id)
-    context = {"nome_pagina": "Informações do produto", "produto": produto}
+    produto = get_object_or_404(Produtos, id=id)
+    vendedor = produto.vendedor  # Adicione esta linha para obter o vendedor associado ao produto
+    context = {"nome_pagina": "Informações do produto", "produto": produto, "vendedor": vendedor}  # Adicione o vendedor ao contexto
     return render(request, "informacoes_produto.html", context)

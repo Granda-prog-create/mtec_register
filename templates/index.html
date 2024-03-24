@@ -164,7 +164,6 @@
                                                 <th>Quantidade</th>
                                                 <th>Valor</th>
                                                 <th>Horário da venda</th>
-                                                <th>Vendedor</th>
                                                 <th>Mais informações</th>
                                             </tr>
                                         </thead>
@@ -175,10 +174,10 @@
                                                     <td>{{ produto.quantidade_venda }}</td>
                                                     <td>{{ produto.valor_produto }}</td>
                                                     <td>{{ produto.get_horario_venda }}</td>
-                                                    <td>{{ produto.get_vendedor }}</td>
+                                                    
                                                     <td>
-                                                        <a href="{% url 'informacoes_produto' id=produto.id %}">
-                                                            Ver informações</a>
+                                                        <a href="{% url 'informacoes_produto' produto.id %}">Ver informações</a>
+
                                                     </td>
                                                 </tr>
                                             {% endfor %}
