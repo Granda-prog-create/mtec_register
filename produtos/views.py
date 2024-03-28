@@ -1,7 +1,8 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from produtos.models import Produtos
-from produtos.forms import ProdutosForm
+from produtos.forms import ProdutosForm, AutorizaVendaForm
+from django.utils import timezone
 
 def registar_produto(request):
     form = ProdutosForm()
@@ -19,6 +20,17 @@ def registar_produto(request):
 
 def informacoes_produto(request, id):
     produto = get_object_or_404(Produtos, id=id)
+    form = AutorizaVendaForm()
+    if request.method == "POST":
+        form = AutorizaVendaForm(request.POST, instance=produto)
+        if form.is_valid():
+            produto = form.save(commit=False)
+            produto.status= "NO_ESTOQUE"
+            produto.horario_autorizacao = timezone.now()
+            produto.save()
+            messages.success(request, "Venda realizada com sucesso!")
+            return redirect("index")
+
     vendedor = produto.vendedor  # Adicione esta linha para obter o vendedor associado ao produto
-    context = {"nome_pagina": "Informações do produto", "produto": produto, "vendedor": vendedor}  # Adicione o vendedor ao contexto
+    context = {"nome_pagina": "Informações do produto", "produto": produto, "vendedor": vendedor, "form": form}  # Adicione o vendedor ao contexto
     return render(request, "informacoes_produto.html", context)
