@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 class Produtos(models.Model):
     STATUS_PRODUTO = [
@@ -13,7 +14,7 @@ class Produtos(models.Model):
     valor_produto = models.CharField(verbose_name="Valor", max_length=200)
     data_venda = models.DateField(verbose_name="Data da venda", auto_now=False, auto_now_add=False)
     quantidade_venda = models.PositiveSmallIntegerField(verbose_name="Quantidade de produtos")
-    vendedor_responsavel = models.CharField(verbose_name="Vendedor Responsável", max_length=194, blank=True, null=True)
+    vendedor_responsavel = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="Vendedor Responsável", on_delete=models.SET_NULL, blank=True, null=True)
     horario_venda = models.DateTimeField(verbose_name="Horário da venda", auto_now_add=True, blank=True, null=True)
     supervisor = models.CharField(verbose_name="Supervisor", max_length=194, blank=True)
 

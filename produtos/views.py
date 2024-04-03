@@ -6,7 +6,7 @@ from django.utils import timezone
 
 def registar_produto(request):
     form = ProdutosForm()
-    if request.method == "POST":
+    if request.method == "POST": 
         form = ProdutosForm(request.POST)
         if form.is_valid():
             produto = form.save(commit=False)
@@ -25,12 +25,12 @@ def informacoes_produto(request, id):
         form = AutorizaVendaForm(request.POST, instance=produto)
         if form.is_valid():
             produto = form.save(commit=False)
-            produto.status= "NO_ESTOQUE"
+            produto.status = "NO_ESTOQUE"
             produto.horario_autorizacao = timezone.now()
             produto.save()
             messages.success(request, "Venda realizada com sucesso!")
             return redirect("index")
 
-    vendedor = produto.vendedor  # Adicione esta linha para obter o vendedor associado ao produto
-    context = {"nome_pagina": "Informações do produto", "produto": produto, "vendedor": vendedor, "form": form}  # Adicione o vendedor ao contexto
+    vendedor_responsavel = produto.vendedor_responsavel  
+    context = {"nome_pagina": "Informações do produto", "produto": produto, "vendedor_responsavel": vendedor_responsavel, "form": form}  
     return render(request, "informacoes_produto.html", context)
