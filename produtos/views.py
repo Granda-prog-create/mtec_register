@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseNotAllowed
 from produtos.models import Produtos
 from produtos.forms import ProdutosForm, AutorizaVendaForm
 from django.utils import timezone
@@ -34,3 +35,15 @@ def informacoes_produto(request, id):
     vendedor_responsavel = produto.vendedor_responsavel  
     context = {"nome_pagina": "Informações do produto", "produto": produto, "vendedor_responsavel": vendedor_responsavel, "form": form}  
     return render(request, "informacoes_produto.html", context)
+
+def finalizar_venda(request, id):
+    produto = get_object_or_404(Produtos, id=id)
+    if request.method == "POST":
+        produto.status = "FINALIZADO"
+        produto.horario_saida = timezone.now()
+        produto.save()
+        messages.success(request, "Venda finalizada com sucesso!")
+        return redirect("index")
+
+    else:
+        return HttpResponseNotAllowed(["POST"], "Método não permitido")
