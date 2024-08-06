@@ -1,3 +1,4 @@
+import re
 from django.db import models
 from django.conf import settings
 
@@ -33,6 +34,7 @@ class Produtos(models.Model):
         if self.vendedor_responsavel:
             return self.vendedor_responsavel
         return "Produto aguardando autorização..."
+    
     
     class Meta:
         verbose_name = "Produto"
