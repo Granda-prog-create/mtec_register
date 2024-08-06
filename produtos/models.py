@@ -11,12 +11,18 @@ class Produtos(models.Model):
     status = models.CharField(verbose_name="Status", max_length=10, choices=STATUS_PRODUTO, default="AGUARDANDO")
 
     nome_produto = models.CharField(verbose_name="Produto", max_length=200)
+
     valor_produto = models.CharField(verbose_name="Valor", max_length=200)
+
     data_venda = models.DateField(verbose_name="Data da venda", auto_now=False, auto_now_add=False)
+
     quantidade_venda = models.PositiveSmallIntegerField(verbose_name="Quantidade de produtos")
+
     vendedor_responsavel = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="Vendedor Responsável", on_delete=models.SET_NULL, blank=True, null=True)
+
     horario_venda = models.DateTimeField(verbose_name="Horário da venda", auto_now_add=True, blank=True, null=True)
-    supervisor = models.CharField(verbose_name="Supervisor", max_length=194, blank=True)
+
+    supervisor = models.CharField(verbose_name="Supervisor", max_length=194, blank=True) 
 
     def get_horario_venda(self):
         if self.horario_venda:
