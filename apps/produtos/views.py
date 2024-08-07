@@ -4,7 +4,9 @@ from django.http import HttpResponseNotAllowed
 from produtos.models import Produtos
 from produtos.forms import ProdutosForm, AutorizaVendaForm
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def registar_produto(request):
     form = ProdutosForm()
     if request.method == "POST": 
@@ -19,6 +21,7 @@ def registar_produto(request):
     context = {"nome_pagina": "Registrar produto", "form": form}
     return render(request, "registrar_produto.html", context)
 
+@login_required
 def informacoes_produto(request, id):
     produto = get_object_or_404(Produtos, id=id)
     form = AutorizaVendaForm()
@@ -36,6 +39,7 @@ def informacoes_produto(request, id):
     context = {"nome_pagina": "Informações do produto", "produto": produto, "vendedor_responsavel": vendedor_responsavel, "form": form}  
     return render(request, "informacoes_produto.html", context)
 
+@login_required
 def finalizar_venda(request, id):
     produto = get_object_or_404(Produtos, id=id)
     if request.method == "POST":

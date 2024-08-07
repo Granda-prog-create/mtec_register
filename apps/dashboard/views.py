@@ -1,7 +1,10 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from produtos.models import Produtos
 from django.utils import timezone
 
+
+@login_required
 def index(request):
     todos_produtos = Produtos.objects.all()
 
