@@ -1,4 +1,4 @@
-Superuser: mdeveloper.12@outlook.com
+Create your own superuser
 
 Instalações para criar as pastas de usuários
 python manage.py startapp (nome da pasta)

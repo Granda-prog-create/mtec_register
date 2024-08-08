@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from users.views import index
+from users.views import index, user_logout
 from produtos.views import (registar_produto, informacoes_produto, finalizar_venda)
 
 urlpatterns = [
@@ -11,11 +11,10 @@ urlpatterns = [
         template_name="login.html"), 
         name="login"),
 
-    path("logout/", auth_views.LogoutView.as_view(
-        template_name="logout.html"),
-          name="logout"),
+    path("logout/", user_logout, name="logout"), 
 
     path("", index, name="index"),
+
 
     path("registrar-produto/", registar_produto, name="registrar_produto"),  
 
@@ -23,3 +22,5 @@ urlpatterns = [
 
     path("vendas/<int:id>/finalizar-venda", finalizar_venda, name="finalizar_venda"),
 ]
+
+
