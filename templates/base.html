@@ -92,7 +92,7 @@
                     
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                        <form method="post" action="{% url 'logout' %}">
+                        <form method="post" action="{% url 'login' %}">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-primary">Sair</button>
                         </form>
