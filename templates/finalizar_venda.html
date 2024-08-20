@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+<div class="container">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">{{ nome_pagina }}</h1>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <h4 class="mb-3 text-primary">
+                Finalizar Venda
+            </h4>
+
+            <p class="mb-5 ml-l">
+                <small>
+                    Revise os detalhes da venda e confirme a finalização.
+                </small>
+            </p>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <strong>ID da Venda:</strong> {{ venda.id }}
+                </div>
+                <div class="form-group col-md-12">
+                    <strong>Produto:</strong> {{ venda.produto.nome }}
+                </div>
+                <div class="form-group col-md-12">
+                    <strong>Quantidade:</strong> {{ venda.quantidade }}
+                </div>
+                <div class="form-group col-md-12">
+                    <strong>Total:</strong> {{ venda.total }}
+                </div>
+            </div>
+
+            <div class="text-right">
+                <form method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-primary" type="submit">
+                        <span class="text">Confirmar Finalização</span>
+                    </button>
+                    <a href="{% url 'index' %}" class="btn btn-secondary">
+                        <span class="text">Cancelar</span>
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

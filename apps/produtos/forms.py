@@ -12,13 +12,13 @@ class ProdutosForm(forms.ModelForm):
         }
 
 class AutorizaVendaForm(forms.ModelForm):
-    class Meta:
+    class Meta: 
         model = Produtos
         fields = [
             "vendedor_responsavel"
         ]  
         error_messages = {
             "vendedor_responsavel": {
-                "required": "Por favor, informe o nome do vendedor responsável" 
+                "required": "Por favor, informe o nome do vendedor responsável", 
             }
         }

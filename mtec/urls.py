@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from users.views import index, user_logout
-from produtos.views import (registar_produto, informacoes_produto, finalizar_venda)
+from produtos.views import (registar_produto, informacoes_produto, finalizar_venda, editar_produto, excluir_produto)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -21,6 +21,11 @@ urlpatterns = [
     path("produtos/<int:id>/", informacoes_produto, name="informacoes_produto"),
 
     path("vendas/<int:id>/finalizar-venda", finalizar_venda, name="finalizar_venda"),
+
+    path("produtos/<int:id>/editar_produto", editar_produto, name="editar_produto"),
+
+    path("produtos/<int:id>/excluir_produto", editar_produto, name="excluir_produto"),
+
 ]
 
 

@@ -14,9 +14,9 @@
 
 <body id="page-top">
     <div id="wrapper">
-        <!-- Sidebar -->
+    
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            <!-- Sidebar - Brand -->
+           
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'index' %}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-user-shield"></i>
@@ -32,8 +32,7 @@
             </li>
             <hr class="sidebar-divider">
         </ul>
-        <!-- End of Sidebar -->
-
+        
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -61,10 +60,16 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">{{ nome_pagina }}</h1>
                         <div>
-                            <a href="{% url 'registrar_produto' %}" class="btn btn-primary btn-icon-split btn-sm">
-                                <span class="text">Registrar produto</span>
+                            <a href="{% url 'registrar_produto' %}" class="btn btn-success btn-icon-split btn-sm">
+                                <span class="text">Registrar um novo produto</span>
                                 <span class="icon text-white-50">
                                     <i class="fas fa-user-plus"></i>
+                                </span>
+                            </a>
+                            <a href="#" class="btn btn-primary btn-icon-split btn-sm" id="salvar-alteracoes">
+                                <span class="text">Salvar alterações</span>
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-save"></i>
                                 </span>
                             </a>
                             <a href="{% url 'index' %}" class="btn btn-secondary btn-icon-split btn-sm ml-2">
@@ -81,17 +86,17 @@
                             <div class="card shadow mb-4">
                                 <div class="card-body">
                                     <h4 class="mb-3 text-primary">Informações gerais</h4>
-                                    <form>
+                                    <form id="form-alteracoes">
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label>Produto</label>
-                                                <input type="text" class="form-control" value="{{ produto.nome_produto }}" disabled>
+                                                <input type="text" class="form-control" name="nome_produto" value="{{ produto.nome_produto }}">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
-                                                <label>Valor unitário</label>
-                                                <input type="text" class="form-control" value="{{valor_produto }}" disabled>
+                                                <label>Valor</label>
+                                                <input type="text" class="form-control" name="valor_produto" value="{{ valor_produto }}">
                                             </div>
                                         </div>
                                     </form>
@@ -154,5 +159,11 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('salvar-alteracoes').addEventListener('click', function() {
+            document.getElementById('form-alteracoes').submit();
+        });
+    </script>
 </body>
 </html>

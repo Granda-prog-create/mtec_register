@@ -29,7 +29,7 @@ def informacoes_produto(request, id):
         form = AutorizaVendaForm(request.POST, instance=produto)
         if form.is_valid():
             produto = form.save(commit=False)
-            produto.status = "NO_ESTOQUE"
+            produto.status = "NO_ESTOQUE" 
             produto.horario_autorizacao = timezone.now()
             produto.save()
             messages.success(request, "Venda realizada com sucesso!")
@@ -51,3 +51,30 @@ def finalizar_venda(request, id):
 
     else:
         return HttpResponseNotAllowed(["POST"], "Método não permitido")
+
+@login_required
+def editar_produto(request, id):
+    produto = get_object_or_404(Produtos, id=id)
+    form = ProdutosForm(instance=produto)
+    
+    if request.method == "POST":
+        form = ProdutosForm(request.POST, instance=produto)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Produto atualizado com sucesso!")
+            return redirect("index")
+    
+    context = {"nome_pagina": "Editar produto", "form": form, "produto": produto}
+    return render(request, "editar_produto.html", context)
+
+@login_required
+def excluir_produto(request, id):
+    produto = get_object_or_404(Produtos, id=id)
+    
+    if request.method == "POST":
+        produto.delete()
+        messages.success(request, "Produto excluído com sucesso!")
+        return redirect("index")
+    
+    context = {"produto": produto}
+    return render(request, "excluir_produto.html", context)
