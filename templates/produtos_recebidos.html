@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+<div class="container">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">{{ nome_pagina }}</h1>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <h4 class="mb-3 text-primary">
+                Produtos Recebidos
+            </h4>
+
+            <p class="mb-5 ml-l">
+                <small>
+                    Visualize, edite ou exclua os produtos recebidos.
+                </small>
+            </p>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Valor</th>
+                        <th>Data da Venda</th>
+                        <th>Quantidade</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for produto in produtos %}
+                        <tr>
+                            <form method="POST" action="{% url 'salvar_produto' produto.id %}">
+                                {% csrf_token %}
+                                <td>{{ produto.id }}</td>
+                                <td>
+                                    <input type="text" name="nome_produto" value="{{ produto.nome_produto }}" class="form-control" required>
+                                </td>
+                                <td>
+                                    <input type="number" name="valor_produto" value="{{ produto.valor_produto }}" class="form-control" step="0.01" required>
+                                </td>
+                                <td>
+                                    <input type="date" name="data_venda" value="{{ produto.data_venda }}" class="form-control" required>
+                                </td>
+                                <td>
+                                    <input type="number" name="quantidade_venda" value="{{ produto.quantidade_venda }}" class="form-control" required>
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-success btn-sm">Salvar</button>
+                                    <a href="#" class="btn btn-secondary btn-sm" onclick="cancelEdit(this)">Cancelar</a>
+                                </td>
+                            </form>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div> 
+    </div>
+</div>
+
+<script>
+function cancelEdit(button) {
+    const row = button.closest('tr');
+    const inputs = row.querySelectorAll('input');
+    inputs.forEach(input => {
+        input.value = input.defaultValue;
+    });
+}
+</script>
+{% endblock %}

@@ -4,6 +4,7 @@ from django.http import HttpResponseNotAllowed
 from produtos.models import Produtos
 from produtos.forms import ProdutosForm, AutorizaVendaForm
 from django.utils import timezone
+from datetime import datetime
 from django.contrib.auth.decorators import login_required
 
 @login_required
@@ -48,7 +49,6 @@ def finalizar_venda(request, id):
         produto.save()
         messages.success(request, "Venda finalizada com sucesso!")
         return redirect("index")
-
     else:
         return HttpResponseNotAllowed(["POST"], "Método não permitido")
 
@@ -78,3 +78,20 @@ def excluir_produto(request, id):
     
     context = {"produto": produto}
     return render(request, "excluir_produto.html", context)
+
+@login_required
+def produtos_recebidos(request):
+    produtos = Produtos.objects.filter(status="AGUARDANDO")
+    return render(request, 'produtos_recebidos.html', {'nome_pagina': 'Produtos Recebidos', 'produtos': produtos})
+
+@login_required
+def produtos_estoque(request):
+    produtos = Produtos.objects.filter(status="NO_ESTOQUE")
+    return render(request, 'produtos_estoque.html', {'nome_pagina': 'Produtos em Estoque', 'produtos': produtos})
+
+@login_required
+def vendas_mes_atual(request):
+    hoje = timezone.now()
+    primeiro_dia = hoje.replace(day=1)
+    vendas = Produtos.objects.filter(data_venda__gte=primeiro_dia, data_venda__lte=hoje)
+    return render(request, 'vendas_mes_atual.html', {'nome_pagina': 'Vendas Registradas no Mês Atual', 'vendas': vendas})

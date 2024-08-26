@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+<div class="container">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">{{ nome_pagina }}</h1>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <h4 class="mb-3 text-primary">
+                Produtos em Estoque
+            </h4>
+
+            <p class="mb-5 ml-l">
+                <small>
+                    Visualize, edite ou exclua os produtos em estoque.
+                </small>
+            </p>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Produto</th>
+                        <th>Valor</th>
+                        <th>Data da Venda</th>
+                        <th>Quantidade</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for produto in produtos %}
+                        <tr>
+                            <td>{{ produto.id }}</td>
+                            <td>{{ produto.nome_produto }}</td>
+                            <td>{{ produto.valor_produto }}</td>
+                            <td>{{ produto.data_venda }}</td>
+                            <td>{{ produto.quantidade_venda }}</td>
+                            <td>
+                                <a href="{% url 'editar_produto' produto.id %}" class="btn btn-warning btn-sm">Editar</a>
+                                <a href="{% url 'excluir_produto' produto.id %}" class="btn btn-danger btn-sm">Excluir</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
