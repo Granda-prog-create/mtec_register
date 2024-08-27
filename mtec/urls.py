@@ -19,9 +19,9 @@ urlpatterns = [
 
     path("vendas/<int:id>/finalizar-venda", finalizar_venda, name="finalizar_venda"),
 
-    path("produtos/<int:id>/editar_produto", editar_produto, name="editar_produto"),
+    path("produtos/<int:id>/editar-produto", editar_produto, name="editar_produto"),
 
-    path("produtos/<int:id>/excluir_produto", excluir_produto, name="excluir_produto"),
+    path("produtos/<int:id>/excluir-produto", excluir_produto, name="excluir_produto"),
 
     path("produtos-recebidos/", produtos_recebidos, name="produtos_recebidos"),
 
