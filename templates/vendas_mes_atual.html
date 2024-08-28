@@ -9,19 +9,22 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <h4 class="mb-3 text-primary">
-                Vendas Registradas no Mês Atual
+                Vendas
             </h4>
 
-            <p class="mb-5 ml-l">
-                <small>
-                    Visualize, edite ou exclua as vendas registradas no mês atual.
-                </small>
-            </p>
+            <form method="get">
+                <select name="mes" class="form-control mb-3">
+                    <option value="">Selecione o mês</option>
+                    {% for i in meses %}
+                        <option value="{{ i }}" {% if mes_selecionado == i|stringformat:"d" %}selected{% endif %}>{{ i|stringformat:"02d" }}</option> 
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </form>
 
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        
                         <th>Produto</th>
                         <th>Valor</th>
                         <th>Data da Venda</th>
@@ -32,7 +35,6 @@
                 <tbody>
                     {% for venda in vendas %}
                         <tr>
-                            <td>{{ venda.id }}</td>
                             <td>{{ venda.produto.nome_produto }}</td>
                             <td>{{ venda.produto.valor_produto }}</td>
                             <td>{{ venda.data_venda }}</td>

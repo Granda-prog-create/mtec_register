@@ -93,5 +93,13 @@ def produtos_estoque(request):
 def vendas_mes_atual(request):
     hoje = timezone.now()
     primeiro_dia = hoje.replace(day=1)
-    vendas = Produtos.objects.filter(data_venda__gte=primeiro_dia, data_venda__lte=hoje)
-    return render(request, 'vendas_mes_atual.html', {'nome_pagina': 'Vendas Registradas no Mês Atual', 'vendas': vendas})
+    mes = request.GET.get('mes')
+    if mes:
+        primeiro_dia = hoje.replace(month=int(mes), day=1)
+        ultimo_dia = hoje.replace(month=int(mes)+1, day=1) - timezone.timedelta(days=1)
+    else:
+        ultimo_dia = hoje
+
+    vendas = Produtos.objects.filter(data_venda__gte=primeiro_dia, data_venda__lte=ultimo_dia)
+    meses = range(1, 13)
+    return render(request, 'vendas_mes_atual.html', {'nome_pagina': 'Vendas Registradas no Mês', 'vendas': vendas, 'meses': meses, 'mes_selecionado': mes})
