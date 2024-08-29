@@ -82,7 +82,7 @@ def excluir_produto(request, id):
 @login_required
 def produtos_recebidos(request):
     produtos = Produtos.objects.filter(status="AGUARDANDO")
-    return render(request, 'produtos_recebidos.html', {'nome_pagina': 'Produtos Recebidos', 'produtos': produtos})
+    return render(request, 'produtos_recebidos.html', {'nome_pagina': 'Produtos disponíveis', 'produtos': produtos})
 
 @login_required
 def produtos_estoque(request):
