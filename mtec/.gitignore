@@ -1,0 +1,12 @@
+.env
+docker-compose.yml
+Dockerfile
+db_data/
+.idea/
+*.pyc
+__pycache__/
+build/
+dist/
+db.sqlite3
+*.log
+.DS_Store

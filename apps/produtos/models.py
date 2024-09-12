@@ -24,7 +24,7 @@ class Produtos(models.Model):
     horario_venda = models.DateTimeField(verbose_name="Horário da venda", auto_now_add=True, blank=True, null=True)
 
     supervisor = models.CharField(verbose_name="Supervisor", max_length=194, blank=True) 
-
+ 
     def get_horario_venda(self):
         if self.horario_venda:
             return self.horario_venda

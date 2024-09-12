@@ -24,10 +24,12 @@ def registar_produto(request):
 
 @login_required
 def informacoes_produto(request, id):
+    
     produto = get_object_or_404(Produtos, id=id)
     form = AutorizaVendaForm()
     if request.method == "POST":
         form = AutorizaVendaForm(request.POST, instance=produto)
+        
         if form.is_valid():
             produto = form.save(commit=False)
             produto.status = "NO_ESTOQUE" 
